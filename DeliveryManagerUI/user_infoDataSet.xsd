@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="user_infoDataSet" targetNamespace="http://tempuri.org/user_infoDataSet.xsd" xmlns:mstns="http://tempuri.org/user_infoDataSet.xsd" xmlns="http://tempuri.org/user_infoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="user_infoConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="user_infoConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.DeliveryManagerUI.Properties.Settings.GlobalReference.Default.user_infoConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="c_view_stores_staffTableAdapter" GeneratorDataComponentClassName="c_view_stores_staffTableAdapter" Name="c_view_stores_staff" UserDataComponentName="c_view_stores_staffTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="user_infoConnectionString (Settings)" DbObjectName="user_info.dbo.c_view_stores_staff" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT id, fullname, [current], current_department_id, actual_department, allocation_dept_2, allocation_dept_3, allocation_dept_4, allocation_dept_5, allocation_dept_6 FROM dbo.c_view_stores_staff</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="id" DataSetColumn="id" />
+              <Mapping SourceColumn="fullname" DataSetColumn="fullname" />
+              <Mapping SourceColumn="current" DataSetColumn="current" />
+              <Mapping SourceColumn="current_department_id" DataSetColumn="current_department_id" />
+              <Mapping SourceColumn="actual_department" DataSetColumn="actual_department" />
+              <Mapping SourceColumn="allocation_dept_2" DataSetColumn="allocation_dept_2" />
+              <Mapping SourceColumn="allocation_dept_3" DataSetColumn="allocation_dept_3" />
+              <Mapping SourceColumn="allocation_dept_4" DataSetColumn="allocation_dept_4" />
+              <Mapping SourceColumn="allocation_dept_5" DataSetColumn="allocation_dept_5" />
+              <Mapping SourceColumn="allocation_dept_6" DataSetColumn="allocation_dept_6" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="user_infoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="user_infoDataSet" msprop:Generator_UserDSName="user_infoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="c_view_stores_staff" msprop:Generator_TableClassName="c_view_stores_staffDataTable" msprop:Generator_TableVarName="tablec_view_stores_staff" msprop:Generator_TablePropName="c_view_stores_staff" msprop:Generator_RowDeletingName="c_view_stores_staffRowDeleting" msprop:Generator_RowChangingName="c_view_stores_staffRowChanging" msprop:Generator_RowEvHandlerName="c_view_stores_staffRowChangeEventHandler" msprop:Generator_RowDeletedName="c_view_stores_staffRowDeleted" msprop:Generator_UserTableName="c_view_stores_staff" msprop:Generator_RowChangedName="c_view_stores_staffRowChanged" msprop:Generator_RowEvArgName="c_view_stores_staffRowChangeEvent" msprop:Generator_RowClassName="c_view_stores_staffRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnid" msprop:Generator_ColumnPropNameInRow="id" msprop:Generator_ColumnPropNameInTable="idColumn" msprop:Generator_UserColumnName="id" type="xs:int" />
+              <xs:element name="fullname" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnfullname" msprop:Generator_ColumnPropNameInRow="fullname" msprop:Generator_ColumnPropNameInTable="fullnameColumn" msprop:Generator_UserColumnName="fullname" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="41" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="current" msprop:Generator_ColumnVarNameInTable="columncurrent" msprop:Generator_ColumnPropNameInRow="current" msprop:Generator_ColumnPropNameInTable="currentColumn" msprop:Generator_UserColumnName="current" type="xs:boolean" minOccurs="0" />
+              <xs:element name="current_department_id" msprop:Generator_ColumnVarNameInTable="columncurrent_department_id" msprop:Generator_ColumnPropNameInRow="current_department_id" msprop:Generator_ColumnPropNameInTable="current_department_idColumn" msprop:Generator_UserColumnName="current_department_id" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="actual_department" msprop:Generator_ColumnVarNameInTable="columnactual_department" msprop:Generator_ColumnPropNameInRow="actual_department" msprop:Generator_ColumnPropNameInTable="actual_departmentColumn" msprop:Generator_UserColumnName="actual_department" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="allocation_dept_2" msprop:Generator_ColumnVarNameInTable="columnallocation_dept_2" msprop:Generator_ColumnPropNameInRow="allocation_dept_2" msprop:Generator_ColumnPropNameInTable="allocation_dept_2Column" msprop:Generator_UserColumnName="allocation_dept_2" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="allocation_dept_3" msprop:Generator_ColumnVarNameInTable="columnallocation_dept_3" msprop:Generator_ColumnPropNameInRow="allocation_dept_3" msprop:Generator_ColumnPropNameInTable="allocation_dept_3Column" msprop:Generator_UserColumnName="allocation_dept_3" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="allocation_dept_4" msprop:Generator_ColumnVarNameInTable="columnallocation_dept_4" msprop:Generator_ColumnPropNameInRow="allocation_dept_4" msprop:Generator_ColumnPropNameInTable="allocation_dept_4Column" msprop:Generator_UserColumnName="allocation_dept_4" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="allocation_dept_5" msprop:Generator_ColumnVarNameInTable="columnallocation_dept_5" msprop:Generator_ColumnPropNameInRow="allocation_dept_5" msprop:Generator_ColumnPropNameInTable="allocation_dept_5Column" msprop:Generator_UserColumnName="allocation_dept_5" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="allocation_dept_6" msprop:Generator_ColumnVarNameInTable="columnallocation_dept_6" msprop:Generator_ColumnPropNameInRow="allocation_dept_6" msprop:Generator_ColumnPropNameInTable="allocation_dept_6Column" msprop:Generator_UserColumnName="allocation_dept_6" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
