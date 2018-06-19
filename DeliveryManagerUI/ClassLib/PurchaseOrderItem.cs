@@ -12,6 +12,12 @@ namespace DeliveryManagerUI.ClassLib
 
         public string _stockCode { get; set; }
 
+        
+
+
+
+
+
         public double _onOrderAmount
         {
             get
@@ -33,7 +39,35 @@ namespace DeliveryManagerUI.ClassLib
         }
 
 
+        public void insertActivityRecord(double qty,string itemDesc, double poID)
+        {
+            //Fixes truncation issue
+            string shortDesc = itemDesc.Substring(0, (itemDesc.Length > 49 ? 49 : itemDesc.Length));
 
+
+            if (_stockCode == "M" || _stockCode == "T" || _stockCode == "m"  || _stockCode == "t")
+            {
+
+            }
+            else
+            {
+                SqlConnection conn = new SqlConnection(CS.ConnectionString);
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "INSERT INTO dbo.po_activity_log (PO_id,user_created,date_created,action,para_1,para_2) " +
+                                  "VALUES (@poID,242,@date,'ITEM DELIVERED',@qty,@desc);";
+                cmd.Parameters.AddWithValue("@poID", poID);
+                cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                cmd.Parameters.AddWithValue("@qty", qty);
+                cmd.Parameters.AddWithValue("@desc", shortDesc);
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+
+            
+        }
 
         public double getPreviousQuantity(int poItemId)
         {
@@ -43,6 +77,7 @@ namespace DeliveryManagerUI.ClassLib
             SqlCommand cmd = new SqlCommand("SELECT delivered_quantity from dbo.po_item where id = @id",conn);
             cmd.Parameters.AddWithValue("@id", poItemId);
             return Convert.ToDouble(cmd.ExecuteScalar());
+            conn.Close();
 
 
         }
@@ -56,6 +91,7 @@ namespace DeliveryManagerUI.ClassLib
             cmd.Parameters.AddWithValue("@qty", qtyDiff);
             cmd.Parameters.AddWithValue("@sc", stockCode);
             cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
 
@@ -68,7 +104,8 @@ namespace DeliveryManagerUI.ClassLib
             cmd.Parameters.AddWithValue("@qty", deliveredQty);
             cmd.Parameters.AddWithValue("@id", itemID);
             cmd.ExecuteNonQuery();
-        
+            conn.Close();
+
         }
 
         public void checkItemDeliveryComplete(int itemID, double orderQty, double deliveredQty)
@@ -99,7 +136,7 @@ namespace DeliveryManagerUI.ClassLib
                 }
             }
 
-            
+            conn.Close();
 
         }
 

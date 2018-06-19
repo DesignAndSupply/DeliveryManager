@@ -41,19 +41,20 @@ namespace DeliveryManagerUI.ClassLib
 
         }
 
-        public void printSmallStockLabel()
+        public void printSmallStockLabel(string copyCount)
         {
             ComponentInfo.SetLicense("FREE-LIMITED-KEY");
             DocumentModel document = DocumentModel.Load(@"\\designsvr1\apps\Design and Supply CSharp\Documents\Stores\BarcodeLabel2.docx");
 
-
+            PrintOptions po = new PrintOptions();
+            po.CopyCount = Convert.ToInt32(copyCount);
 
             document.Bookmarks["SC"].GetContent(false).LoadText(_sc.ToString());
             document.Bookmarks["DESC"].GetContent(false).LoadText(_desc);
             document.Bookmarks["BC"].GetContent(false).LoadText("*" + _sc.ToString() + "*");
+            
 
-
-            document.Print("ZDesignerGK420d");
+            document.Print("ZDesignerGK420d",po);
         }
 
 

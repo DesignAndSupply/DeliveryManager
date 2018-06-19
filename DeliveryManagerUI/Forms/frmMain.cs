@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DeliveryManagerUI.ClassLib;
 using System.Data.SqlClient;
+using Microsoft.VisualBasic;
 
 namespace DeliveryManagerUI
 {
@@ -50,6 +51,18 @@ namespace DeliveryManagerUI
         {
             double n;
             bool isNumeric = double.TryParse(txtPOID.Text, out n);
+
+            try
+            {
+                dg.Columns.Remove("Print Label");
+                dg.DataSource = null;
+            }
+            catch
+            {
+
+            }
+
+
 
             if (isNumeric)
             {
@@ -178,6 +191,13 @@ namespace DeliveryManagerUI
             foreach (DataGridViewRow row in dg.Rows)
             {
 
+                if (string.IsNullOrWhiteSpace(row.Cells[2].Value.ToString()))
+                {
+
+
+                }
+                else
+                {
                     stockCode = row.Cells[2].Value.ToString();
                     amountOnOrder = Convert.ToDouble(row.Cells[4].Value);
 
@@ -195,6 +215,16 @@ namespace DeliveryManagerUI
 
                     //updates the po item delivered amount
                     poi.updateItem(Convert.ToInt32(row.Cells[0].Value), newDeliveredValue);
+
+
+                    //INSERT ACTIVITY RECORD --ONLY INSERT RECORDS WHERE THERE IS A DIFFERENT IN THE OLD STOCK FIGURE TO THE NEW
+
+                    if (stockUpdateValue != 0)
+                    {
+                        poi.insertActivityRecord(stockUpdateValue, row.Cells[3].Value.ToString(), Convert.ToDouble(txtPOID.Text));
+                    }
+
+
 
 
                     int n;
@@ -217,8 +247,10 @@ namespace DeliveryManagerUI
 
                     if (isNumeric || stockCode == "S1" || stockCode == "s1")
                     {
-                    poi.checkItemDeliveryComplete(Convert.ToInt32(row.Cells[0].Value), amountOnOrder, newDeliveredValue);
+                        poi.checkItemDeliveryComplete(Convert.ToInt32(row.Cells[0].Value), amountOnOrder, newDeliveredValue);
                     }
+
+                }
 
 
 
@@ -370,8 +402,11 @@ namespace DeliveryManagerUI
             {
                 try
                 {
+
+                    string labelCount = Interaction.InputBox("How many labels would you like?", "How Many?", "1", -1, -1);
+
                     ClassLib.Label l = new ClassLib.Label(sc, itemID);
-                    l.printSmallStockLabel();
+                    l.printSmallStockLabel(labelCount);
                 }
                 catch
                 {
@@ -387,6 +422,40 @@ namespace DeliveryManagerUI
         private void dg_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dg_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewRow Myrow in dg.Rows)
+            {            //Here 2 cell is target value and 1 cell is Volume
+
+                if (string.IsNullOrWhiteSpace(Myrow.Cells[5].Value.ToString())==true || string.IsNullOrWhiteSpace(Myrow.Cells[4].Value.ToString()) == true)
+                {
+                    
+                }
+                else
+                {
+                    try
+                    {
+                        if (Convert.ToDouble(Myrow.Cells[5].Value) < Convert.ToDouble(Myrow.Cells[4].Value))// Or your condition 
+                        {
+                            Myrow.DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                        }
+                        else
+                        {
+                            Myrow.DefaultCellStyle.BackColor = Color.PaleGreen;
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    
+                }
+
+
+                
+            }
         }
     }
 }
