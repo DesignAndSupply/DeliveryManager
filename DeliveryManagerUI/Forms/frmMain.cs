@@ -160,9 +160,9 @@ namespace DeliveryManagerUI
 
 
                     //CLEAN UP THE GRID
-                    dg.DataSource = null;
-                    dg.Columns.RemoveAt(0);
-                    txtPOID.Text = "";
+                    //dg.DataSource = null;
+                    //dg.Columns.RemoveAt(0);
+                    //txtPOID.Text = "";
 
 
                 }
