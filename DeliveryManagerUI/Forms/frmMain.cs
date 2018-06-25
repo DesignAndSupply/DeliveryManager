@@ -221,7 +221,7 @@ namespace DeliveryManagerUI
 
                     if (stockUpdateValue != 0)
                     {
-                        poi.insertActivityRecord(stockUpdateValue, row.Cells[3].Value.ToString(), Convert.ToDouble(txtPOID.Text));
+                        poi.insertActivityRecord(stockUpdateValue, row.Cells[3].Value.ToString(), Convert.ToDouble(txtPOID.Text),txtIdentifier.Text);
                     }
 
 

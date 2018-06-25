@@ -39,7 +39,7 @@ namespace DeliveryManagerUI.ClassLib
         }
 
 
-        public void insertActivityRecord(double qty,string itemDesc, double poID)
+        public void insertActivityRecord(double qty,string itemDesc, double poID, string delNote)
         {
             //Fixes truncation issue
             string shortDesc = itemDesc.Substring(0, (itemDesc.Length > 49 ? 49 : itemDesc.Length));
@@ -59,7 +59,7 @@ namespace DeliveryManagerUI.ClassLib
                                   "VALUES (@poID,242,@date,'ITEM DELIVERED',@qty,@desc);";
                 cmd.Parameters.AddWithValue("@poID", poID);
                 cmd.Parameters.AddWithValue("@date", DateTime.Now);
-                cmd.Parameters.AddWithValue("@qty", qty);
+                cmd.Parameters.AddWithValue("@qty", qty + " DN(" + delNote + ")");
                 cmd.Parameters.AddWithValue("@desc", shortDesc);
 
                 cmd.ExecuteNonQuery();
