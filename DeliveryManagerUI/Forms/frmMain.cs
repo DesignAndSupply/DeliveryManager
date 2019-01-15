@@ -151,7 +151,7 @@ namespace DeliveryManagerUI
 
                 PurchaseOrder po = new PurchaseOrder(n);
 
-                if (validateDeliveryDetails() == true && po._isValid && dg.Rows.Count > 0)
+                if (validateDeliveryDetails() == true && po._isValid && dg.Rows.Count > 0 && string.IsNullOrWhiteSpace(cmbStaff.Text) == false)
                 {
                     logDelivery();
                     gridLoop();
@@ -168,7 +168,7 @@ namespace DeliveryManagerUI
                 }
                 else
                 {
-                    MessageBox.Show("Please ensure all delivery information is added, a valid purchase order number is being used and there is data in the grid", "Missing information", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please ensure all delivery information is added, a valid purchase order number must be used and (Recieved by) must not be blank", "Missing information", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -187,7 +187,7 @@ namespace DeliveryManagerUI
             double stockUpdateValue;
             string stockCode;
             double amountOnOrder;
-
+            int userID;
             foreach (DataGridViewRow row in dg.Rows)
             {
 
@@ -200,10 +200,10 @@ namespace DeliveryManagerUI
                 {
                     stockCode = row.Cells[2].Value.ToString();
                     amountOnOrder = Convert.ToDouble(row.Cells[4].Value);
+                    userID = Convert.ToInt32(cmbStaff.SelectedValue);
 
 
-
-                    PurchaseOrderItem poi = new PurchaseOrderItem(stockCode);
+                    PurchaseOrderItem poi = new PurchaseOrderItem(stockCode, userID);
                     //USES THE ID TO GET THE PREVIOUS DELIVERED AMOUNT
                     previousDeliveredValue = poi.getPreviousQuantity(Convert.ToInt32(row.Cells[0].Value));
 
@@ -353,7 +353,7 @@ namespace DeliveryManagerUI
             if (isNumeric)
             {
                 PurchaseOrder po = new PurchaseOrder(n);
-                if (po._isValid && dg.Rows.Count > 0)
+                if (po._isValid && dg.Rows.Count > 0 && string.IsNullOrWhiteSpace(cmbStaff.Text)==false)
                 {
                     gridLoop();
                     MessageBox.Show("Delivery has successfully been updated!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -362,7 +362,7 @@ namespace DeliveryManagerUI
                 }
                 else
                 {
-                    MessageBox.Show("Purchase order number selection is not valid or datagrid is not filled in. Please try again!", "Invalid Number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Purchase order number selection is not valid or (Recieved by field) has not been completed. Please try again!", "Invalid Number", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else

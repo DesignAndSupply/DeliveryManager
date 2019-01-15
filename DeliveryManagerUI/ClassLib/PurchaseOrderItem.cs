@@ -11,8 +11,9 @@ namespace DeliveryManagerUI.ClassLib
     {
 
         public string _stockCode { get; set; }
+        public int _userID { get; set; }
 
-        
+
 
 
 
@@ -33,9 +34,10 @@ namespace DeliveryManagerUI.ClassLib
 
 
 
-        public PurchaseOrderItem(string stockCode)
+        public PurchaseOrderItem(string stockCode,int user_id)
         {
             _stockCode = stockCode;
+            _userID = user_id;
         }
 
 
@@ -56,7 +58,8 @@ namespace DeliveryManagerUI.ClassLib
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
                 cmd.CommandText = "INSERT INTO dbo.po_activity_log (PO_id,user_created,date_created,action,para_1,para_2) " +
-                                  "VALUES (@poID,242,@date,'ITEM DELIVERED',@qty,@desc);";
+                                  "VALUES (@poID,@userID,@date,'ITEM DELIVERED',@qty,@desc);";
+                cmd.Parameters.AddWithValue("@userID", _userID);
                 cmd.Parameters.AddWithValue("@poID", poID);
                 cmd.Parameters.AddWithValue("@date", DateTime.Now);
                 cmd.Parameters.AddWithValue("@qty", qty + " DN(" + delNote + ")");
