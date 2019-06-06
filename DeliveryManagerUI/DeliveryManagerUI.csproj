@@ -24,7 +24,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\designsvr1\apps\Design and Supply CSharp\ShopFloorApps\DeliveryManager\</InstallUrl>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,6 +82,7 @@
     <Compile Include="ClassLib\CS.cs" />
     <Compile Include="ClassLib\Delivery.cs" />
     <Compile Include="ClassLib\Label.cs" />
+    <Compile Include="ClassLib\Location.cs" />
     <Compile Include="ClassLib\PurchaseOrder.cs" />
     <Compile Include="ClassLib\PurchaseOrderItem.cs" />
     <Compile Include="Forms\frmMain.cs">

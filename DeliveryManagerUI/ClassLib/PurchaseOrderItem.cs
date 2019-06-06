@@ -12,12 +12,7 @@ namespace DeliveryManagerUI.ClassLib
 
         public string _stockCode { get; set; }
         public int _userID { get; set; }
-
-
-
-
-
-
+        public double _lineItemID { get; set; }
 
         public double _onOrderAmount
         {
@@ -32,12 +27,23 @@ namespace DeliveryManagerUI.ClassLib
             }
         }
 
+        public double _toSite { get; set; }
 
+        private void getToSite()
+        {
+            SqlConnection conn = new SqlConnection(CS.ConnectionString);
+            conn.Open();
 
-        public PurchaseOrderItem(string stockCode,int user_id)
+            SqlCommand cmd = new SqlCommand("SELECT straight_to_site from dbo.po_item where id = @lineItemID", conn);
+            cmd.Parameters.AddWithValue("@lineItemId", _lineItemID);
+            _toSite = Convert.ToDouble(cmd.ExecuteScalar());
+        }
+
+        public PurchaseOrderItem(string stockCode,int user_id, double lineItemId)
         {
             _stockCode = stockCode;
             _userID = user_id;
+            _lineItemID = lineItemId;
         }
 
 
@@ -87,15 +93,27 @@ namespace DeliveryManagerUI.ClassLib
 
         public void updateStock(string stockCode, double qtyDiff)
         {
-            SqlConnection conn = new SqlConnection(CS.ConnectionString);
-            conn.Open();
+            getToSite();
+            if (_toSite != -1)
+            {
 
-            SqlCommand cmd = new SqlCommand("UPDATE dbo.stock set amount_in_stock = amount_in_stock + @qty where stock_code = @sc", conn);
-            cmd.Parameters.AddWithValue("@qty", qtyDiff);
-            cmd.Parameters.AddWithValue("@sc", stockCode);
-            cmd.ExecuteNonQuery();
-            conn.Close();
+                SqlConnection conn = new SqlConnection(CS.ConnectionString);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("UPDATE dbo.stock set amount_in_stock = amount_in_stock + @qty where stock_code = @sc", conn);
+                cmd.Parameters.AddWithValue("@qty", qtyDiff);
+                cmd.Parameters.AddWithValue("@sc", stockCode);
+                cmd.ExecuteNonQuery();
+
+
+
+                conn.Close();
+
+            }
+
         }
+
+        
 
 
         public void updateItem(int itemID, double deliveredQty)

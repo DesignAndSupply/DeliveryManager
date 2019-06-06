@@ -54,12 +54,15 @@
             this.btnLogDel = new System.Windows.Forms.Button();
             this.btnPoUpdate = new System.Windows.Forms.Button();
             this.lblOrderStatus = new System.Windows.Forms.Label();
+            this.LocationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stores_locationTableAdapter = new DeliveryManagerUI.order_databaseDataSetTableAdapters.stores_locationTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cviewstoresstaffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.storesdeliverycompanyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.order_databaseDataSet)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LocationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPOID
@@ -284,6 +287,16 @@
             this.lblOrderStatus.Text = "....";
             this.lblOrderStatus.Click += new System.EventHandler(this.lblOrderStatus_Click);
             // 
+            // LocationBindingSource
+            // 
+            this.LocationBindingSource.DataMember = "stores_location";
+            this.LocationBindingSource.DataSource = this.order_databaseDataSet;
+            this.LocationBindingSource.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            // 
+            // stores_locationTableAdapter
+            // 
+            this.stores_locationTableAdapter.ClearBeforeFill = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -315,6 +328,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.order_databaseDataSet)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.LocationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,6 +361,8 @@
         private System.Windows.Forms.TextBox txtIdentifier;
         private System.Windows.Forms.Button btnPoUpdate;
         private System.Windows.Forms.Label lblOrderStatus;
+        private System.Windows.Forms.BindingSource LocationBindingSource;
+        private order_databaseDataSetTableAdapters.stores_locationTableAdapter stores_locationTableAdapter;
     }
 }
 

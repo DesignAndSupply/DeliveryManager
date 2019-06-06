@@ -23,6 +23,8 @@ namespace DeliveryManagerUI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'order_databaseDataSet.stores_location' table. You can move, or remove it, as needed.
+            this.stores_locationTableAdapter.Fill(this.order_databaseDataSet.stores_location);
             // TODO: This line of code loads data into the 'order_databaseDataSet.stores_delivery_company' table. You can move, or remove it, as needed.
             this.stores_delivery_companyTableAdapter.Fill(this.order_databaseDataSet.stores_delivery_company);
             // TODO: This line of code loads data into the 'user_infoDataSet.c_view_stores_staff' table. You can move, or remove it, as needed.
@@ -37,13 +39,8 @@ namespace DeliveryManagerUI
         private void btnView_Click(object sender, EventArgs e)
         {
 
-
-
             fillGrid();
             
-
-            
-
 
         }
 
@@ -55,13 +52,13 @@ namespace DeliveryManagerUI
             try
             {
                 dg.Columns.Remove("Print Label");
+                dg.Columns.Remove("Location");
                 dg.DataSource = null;
             }
             catch
             {
 
             }
-
 
 
             if (isNumeric)
@@ -122,8 +119,32 @@ namespace DeliveryManagerUI
                         dg.Columns.Insert(columnIndex, buttonlabel);
                     }
 
+                    //INSERTS THE LOCATION SELECTION
+
+                    string str = "SELECT id,stores_location FROM stores_location";
+
+      
+                    SqlDataAdapter sqladap = new SqlDataAdapter(str, conn);
+                    SqlCommandBuilder sqlcmdBuild = new SqlCommandBuilder(sqladap);
+                    DataTable dtlocation = new DataTable();
+                    sqladap.Fill(dtlocation);
+                    BindingSource bs = new BindingSource();
+                    bs.DataSource = dtlocation;
 
 
+                    DataGridViewComboBoxColumn location = new DataGridViewComboBoxColumn();
+                    location.HeaderText = "Location";
+                    location.Name = "Location";
+                    location.DataSource = bs;
+                    location.ValueMember = "id";
+                    location.DisplayMember = "stores_location";
+
+                    columnIndex = 7;
+
+                    if (dg.Columns["Location"] == null)
+                    {
+                        dg.Columns.Insert(columnIndex, location);
+                    }
 
                 }
                 else
@@ -186,6 +207,8 @@ namespace DeliveryManagerUI
             double newDeliveredValue;
             double stockUpdateValue;
             string stockCode;
+            double lineItemID;
+            //string location;
             double amountOnOrder;
             int userID;
             foreach (DataGridViewRow row in dg.Rows)
@@ -199,11 +222,13 @@ namespace DeliveryManagerUI
                 else
                 {
                     stockCode = row.Cells[2].Value.ToString();
+                    lineItemID = Convert.ToDouble(row.Cells[0].Value);
                     amountOnOrder = Convert.ToDouble(row.Cells[4].Value);
+                    //location = row.Cells[7].Value.ToString();
                     userID = Convert.ToInt32(cmbStaff.SelectedValue);
 
 
-                    PurchaseOrderItem poi = new PurchaseOrderItem(stockCode, userID);
+                    PurchaseOrderItem poi = new PurchaseOrderItem(stockCode, userID, lineItemID);
                     //USES THE ID TO GET THE PREVIOUS DELIVERED AMOUNT
                     previousDeliveredValue = poi.getPreviousQuantity(Convert.ToInt32(row.Cells[0].Value));
 
@@ -224,9 +249,6 @@ namespace DeliveryManagerUI
                         poi.insertActivityRecord(stockUpdateValue, row.Cells[3].Value.ToString(), Convert.ToDouble(txtPOID.Text),txtIdentifier.Text);
                     }
 
-
-
-
                     int n;
                     bool isNumeric = int.TryParse(stockCode, out n);
 
@@ -242,6 +264,10 @@ namespace DeliveryManagerUI
                         cmdOnOrder.Parameters.AddWithValue("@qty", poi._onOrderAmount);
                         cmdOnOrder.Parameters.AddWithValue("@sc", stockCode);
                         cmdOnOrder.ExecuteNonQuery();
+
+                        //Adds quantity to location
+                        //Location l = new Location(stockCode, location, stockUpdateValue);
+                        //l.updateInsertLocation();
 
                     }
 
@@ -265,6 +291,7 @@ namespace DeliveryManagerUI
             {
                 txtPOID.Text = "";
                 dg.Columns.Remove("Print Label");
+                dg.Columns.Remove("Location");
                 dg.DataSource = null;
             }
             catch
@@ -456,6 +483,11 @@ namespace DeliveryManagerUI
 
                 
             }
+        }
+
+        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
