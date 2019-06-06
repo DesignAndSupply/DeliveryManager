@@ -36,7 +36,18 @@ namespace DeliveryManagerUI.ClassLib
 
             SqlCommand cmd = new SqlCommand("SELECT straight_to_site from dbo.po_item where id = @lineItemID", conn);
             cmd.Parameters.AddWithValue("@lineItemId", _lineItemID);
-            _toSite = Convert.ToDouble(cmd.ExecuteScalar());
+
+
+            try
+            {
+                _toSite = Convert.ToDouble(cmd.ExecuteScalar());
+            }
+            catch
+            {
+                _toSite = 0;
+            }
+
+
         }
 
         public PurchaseOrderItem(string stockCode,int user_id, double lineItemId)
