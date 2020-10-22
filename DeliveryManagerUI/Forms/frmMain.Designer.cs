@@ -56,6 +56,7 @@
             this.lblOrderStatus = new System.Windows.Forms.Label();
             this.LocationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stores_locationTableAdapter = new DeliveryManagerUI.order_databaseDataSetTableAdapters.stores_locationTableAdapter();
+            this.lblSlimline = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cviewstoresstaffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).BeginInit();
@@ -297,11 +298,24 @@
             // 
             this.stores_locationTableAdapter.ClearBeforeFill = true;
             // 
+            // lblSlimline
+            // 
+            this.lblSlimline.AutoSize = true;
+            this.lblSlimline.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSlimline.ForeColor = System.Drawing.Color.Red;
+            this.lblSlimline.Location = new System.Drawing.Point(264, 287);
+            this.lblSlimline.Name = "lblSlimline";
+            this.lblSlimline.Size = new System.Drawing.Size(531, 39);
+            this.lblSlimline.TabIndex = 16;
+            this.lblSlimline.Text = "SLIMLINE PURCHASE ORDER";
+            this.lblSlimline.Visible = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 656);
+            this.Controls.Add(this.lblSlimline);
             this.Controls.Add(this.lblOrderStatus);
             this.Controls.Add(this.btnPoUpdate);
             this.Controls.Add(this.btnSubmit);
@@ -363,6 +377,7 @@
         private System.Windows.Forms.Label lblOrderStatus;
         private System.Windows.Forms.BindingSource LocationBindingSource;
         private order_databaseDataSetTableAdapters.stores_locationTableAdapter stores_locationTableAdapter;
+        private System.Windows.Forms.Label lblSlimline;
     }
 }
 

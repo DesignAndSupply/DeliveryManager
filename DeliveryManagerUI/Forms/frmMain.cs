@@ -40,9 +40,23 @@ namespace DeliveryManagerUI
         {
 
             fillGrid();
-            
+            double n;
+            bool isNumeric = double.TryParse(txtPOID.Text, out n);
+            PurchaseOrder po = new PurchaseOrder(n);
+
+            if (po._isSlimline == "True")
+            {
+                lblSlimline.Visible = true;
+            }
+            else
+            {
+                lblSlimline.Visible = false;
+            }
 
         }
+
+
+        
 
         private void fillGrid()
         {

@@ -71,8 +71,8 @@ namespace DeliveryManagerUI.ClassLib
             get
             {
 
-                bool partCatch=false;
-                bool completeCatch=false;
+                bool partCatch = false;
+                bool completeCatch = false;
 
                 SqlConnection conn = new SqlConnection(CS.ConnectionString);
                 conn.Open();
@@ -87,7 +87,7 @@ namespace DeliveryManagerUI.ClassLib
                 {
 
                     //SKIP IF TRASPORT OR MESSAGE LINE
-                    if(rdr["stock_code"].ToString() == "M" || rdr["stock_code"].ToString() == "T")
+                    if (rdr["stock_code"].ToString() == "M" || rdr["stock_code"].ToString() == "T")
                     {
 
                     }
@@ -102,7 +102,7 @@ namespace DeliveryManagerUI.ClassLib
                             completeCatch = true;
                         }
                     }
-                       
+
                 }
 
                 if (partCatch == true)
@@ -121,7 +121,7 @@ namespace DeliveryManagerUI.ClassLib
                     }
                 }
 
-                
+
 
             }
         }
@@ -131,6 +131,38 @@ namespace DeliveryManagerUI.ClassLib
         {
             _poID = poID;
         }
+
+
+        public string _isSlimline
+        {
+            get
+            {
+                SqlConnection conn = new SqlConnection(CS.ConnectionString);
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "SELECT * FROM dbo.po WHERE po_id = @poID and slimline_identifier = -1";
+                cmd.Parameters.AddWithValue("@poID", _poID);
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+
+                if (rdr.HasRows)
+                {
+                    return "True";
+                }
+                else
+                {
+                    return "False";
+                }
+
+
+
+            }
+
+                   
+        }
+
 
         public void updateOrderStatus()
         {
