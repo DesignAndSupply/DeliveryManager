@@ -57,6 +57,8 @@
             this.LocationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stores_locationTableAdapter = new DeliveryManagerUI.order_databaseDataSetTableAdapters.stores_locationTableAdapter();
             this.lblSlimline = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cviewstoresstaffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).BeginInit();
@@ -228,6 +230,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtIdentifier);
             this.groupBox1.Controls.Add(this.btnLogDel);
@@ -310,6 +314,25 @@
             this.lblSlimline.Text = "SLIMLINE PURCHASE ORDER";
             this.lblSlimline.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(584, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(310, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(170, 21);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.ValueMember = "id";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,6 +401,8 @@
         private System.Windows.Forms.BindingSource LocationBindingSource;
         private order_databaseDataSetTableAdapters.stores_locationTableAdapter stores_locationTableAdapter;
         private System.Windows.Forms.Label lblSlimline;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

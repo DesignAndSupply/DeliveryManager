@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DeliveryManagerUI.ClassLib;
 using System.Data.SqlClient;
 using Microsoft.VisualBasic;
+using System.Drawing.Printing;
 
 namespace DeliveryManagerUI
 {
@@ -34,6 +35,20 @@ namespace DeliveryManagerUI
             cmbStaff.SelectedIndex = -1;
             cmbDelComp.SelectedIndex = -1;
 
+           // comboBox1.Dock = DockStyle.Top;
+            //Controls.Add(comboBox1);
+
+            // Add list of installed printers found to the combo box.
+            // The pkInstalledPrinters string will be used to provide the display string.
+            int i;
+            string pkInstalledPrinters;
+
+            for (i = 0; i < PrinterSettings.InstalledPrinters.Count; i++)
+            {
+                pkInstalledPrinters = PrinterSettings.InstalledPrinters[i];
+                comboBox1.Items.Add(pkInstalledPrinters);
+
+            }
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -502,6 +517,13 @@ namespace DeliveryManagerUI
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string labelCount = Interaction.InputBox("How many labels would you like?", "How Many?", "1", -1, -1);
+            ClassLib.Label l = new ClassLib.Label("559", 8265);
+            l.printSmallStockLabel(labelCount);
         }
     }
 }

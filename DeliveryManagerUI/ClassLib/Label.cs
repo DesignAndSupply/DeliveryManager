@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GemBox.Document;
 using System.Data.SqlClient;
-
+using System.Drawing.Printing;
 
 namespace DeliveryManagerUI.ClassLib
 {
@@ -43,18 +43,32 @@ namespace DeliveryManagerUI.ClassLib
 
         public void printSmallStockLabel(string copyCount)
         {
+            // get the default printer
+            PrinterSettings settings = new PrinterSettings();
+            string defaultPrinter = (settings.PrinterName);
+            string labelPrinter = @"\\192.168.0.69\ZDesignerGK420d";
+
+            var type = Type.GetTypeFromProgID("WScript.Network");
+            var instance = Activator.CreateInstance(type);
+            type.InvokeMember("SetDefaultPrinter", System.Reflection.BindingFlags.InvokeMethod, null, instance, new object[] { labelPrinter });
+
+
             ComponentInfo.SetLicense("FREE-LIMITED-KEY");
             DocumentModel document = DocumentModel.Load(@"\\designsvr1\apps\Design and Supply CSharp\Documents\Stores\BarcodeLabel2.docx");
-
             PrintOptions po = new PrintOptions();
             po.CopyCount = Convert.ToInt32(copyCount);
 
             document.Bookmarks["SC"].GetContent(false).LoadText(_sc.ToString());
             document.Bookmarks["DESC"].GetContent(false).LoadText(_desc);
-            document.Bookmarks["BC"].GetContent(false).LoadText("*" + _sc.ToString() + "*");
+            document.Bookmarks["BC"].GetContent(false).LoadText("*" + _sc.ToString() + "*"); 
             
+            
+            //PrinterSettings settings2 = new PrinterSettings();
 
-            document.Print("ZDesignerGK420d",po);
+            document.Print(settings.PrinterName, po);
+
+            //revert default back to normal
+            type.InvokeMember("SetDefaultPrinter", System.Reflection.BindingFlags.InvokeMethod, null, instance, new object[] { defaultPrinter });
         }
 
 
