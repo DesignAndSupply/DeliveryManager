@@ -449,15 +449,22 @@ namespace DeliveryManagerUI
                 itemID = Convert.ToInt32(selectedRow.Cells["id"].Value) ;
                 sc = selectedRow.Cells["stock_code"].Value.ToString();
           
-
+                
             }
 
 
 
             if (e.ColumnIndex == dg.Columns["Print Label"].Index)
             {
+                var type = Type.GetTypeFromProgID("WScript.Network");
+                var instance = Activator.CreateInstance(type);
+                string defaultPrinter = "";
                 try
                 {
+
+                   
+                    PrinterSettings settings = new PrinterSettings();
+                    defaultPrinter = (settings.PrinterName); //should always get this
 
                     string labelCount = Interaction.InputBox("How many labels would you like?", "How Many?", "1", -1, -1);
 
@@ -466,6 +473,7 @@ namespace DeliveryManagerUI
                 }
                 catch
                 {
+                    type.InvokeMember("SetDefaultPrinter", System.Reflection.BindingFlags.InvokeMethod, null, instance, new object[] { defaultPrinter });
                     MessageBox.Show("An error has occured, this is likely due to you attempting to print a label for an item without a stock code.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
               

@@ -49,6 +49,8 @@
             this.btnView = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.txtIdentifier = new System.Windows.Forms.TextBox();
             this.btnLogDel = new System.Windows.Forms.Button();
@@ -57,8 +59,6 @@
             this.LocationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.stores_locationTableAdapter = new DeliveryManagerUI.order_databaseDataSetTableAdapters.stores_locationTableAdapter();
             this.lblSlimline = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cviewstoresstaffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.user_infoDataSet)).BeginInit();
@@ -242,6 +242,27 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Delivery Info";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DisplayMember = "id";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(310, 21);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(170, 21);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.ValueMember = "id";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(584, 11);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -313,25 +334,6 @@
             this.lblSlimline.TabIndex = 16;
             this.lblSlimline.Text = "SLIMLINE PURCHASE ORDER";
             this.lblSlimline.Visible = false;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(584, 11);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(310, 21);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(170, 21);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.ValueMember = "id";
             // 
             // frmMain
             // 
