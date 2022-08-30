@@ -32,8 +32,8 @@ namespace DeliveryManagerUI
             this.c_view_stores_staffTableAdapter.Fill(this.user_infoDataSet.c_view_stores_staff);
 
 
-            cmbStaff.SelectedIndex = -1;
-            cmbDelComp.SelectedIndex = -1;
+            //cmbStaff.SelectedIndex = -1;
+            //cmbDelComp.SelectedIndex = -1;
 
            // comboBox1.Dock = DockStyle.Top;
             //Controls.Add(comboBox1);
@@ -198,7 +198,6 @@ namespace DeliveryManagerUI
 
             if (isNumeric)
             {
-
                 PurchaseOrder po = new PurchaseOrder(n);
 
                 if (validateDeliveryDetails() == true && po._isValid && dg.Rows.Count > 0 && string.IsNullOrWhiteSpace(cmbStaff.Text) == false)

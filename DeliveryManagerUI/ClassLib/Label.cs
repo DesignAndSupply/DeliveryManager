@@ -46,7 +46,7 @@ namespace DeliveryManagerUI.ClassLib
             // get the default printer
             PrinterSettings settings = new PrinterSettings();
             string defaultPrinter = (settings.PrinterName);
-            string labelPrinter = @"\\192.168.0.73\ZDesignerGK420d";
+            string labelPrinter = @"\\192.168.0.100\ZDesignerGK420d";
 
             var type = Type.GetTypeFromProgID("WScript.Network");
             var instance = Activator.CreateInstance(type);
